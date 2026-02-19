@@ -56,12 +56,20 @@ export default function RankingsPage() {
             <div className="max-w-4xl mx-auto">
                 <div className="flex justify-between items-center mb-8">
                     <h1 className="text-3xl font-bold text-gray-800">🏆 Leaderboard</h1>
-                    <Link
-                        href="/practice"
-                        className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-semibold"
-                    >
-                        Practice Math
-                    </Link>
+                    <div className="flex gap-4">
+                        <Link
+                            href="/"
+                            className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors font-semibold"
+                        >
+                            ← Back
+                        </Link>
+                        <Link
+                            href="/practice"
+                            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-semibold"
+                        >
+                            Practice Math
+                        </Link>
+                    </div>
                 </div>
 
                 <div className="bg-white rounded-xl shadow-lg overflow-hidden">
@@ -99,8 +107,8 @@ export default function RankingsPage() {
                                             <td className="px-6 py-4 text-center text-gray-500">{student.total_attempted}</td>
                                             <td className="px-6 py-4 text-right">
                                                 <span className={`inline-block px-2 py-1 rounded text-xs font-bold ${accuracy >= 80 ? 'bg-green-100 text-green-800' :
-                                                        accuracy >= 50 ? 'bg-yellow-100 text-yellow-800' :
-                                                            'bg-red-100 text-red-800'
+                                                    accuracy >= 50 ? 'bg-yellow-100 text-yellow-800' :
+                                                        'bg-red-100 text-red-800'
                                                     }`}>
                                                     {accuracy}%
                                                 </span>

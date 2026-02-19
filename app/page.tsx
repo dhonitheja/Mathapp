@@ -12,7 +12,7 @@ export default function Home() {
 
       <div className="flex gap-4 flex-col sm:flex-row">
         <Link
-          href="/practice"
+          href="/login"
           className="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-semibold shadow-lg shadow-blue-200"
         >
           Start Practicing →

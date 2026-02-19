@@ -3,6 +3,7 @@
 
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import Link from 'next/link';
 import { mathSyllabus } from '@/lib/syllabus';
 
 interface QuestionData {
@@ -50,6 +51,21 @@ export default function PracticePage() {
     const [feedbackMessage, setFeedbackMessage] = useState<string | null>(null);
 
     // Initial topic selection when class changes
+    useEffect(() => {
+        // --- Persistence Logic ---
+        if (typeof window !== 'undefined') {
+            const storedName = localStorage.getItem('math_app_student_name');
+            const storedClass = localStorage.getItem('math_app_student_class');
+
+            if (storedName) {
+                setStudentName(storedName);
+            }
+            if (storedClass) {
+                setSelectedClass(Number(storedClass));
+            }
+        }
+    }, []);
+
     useEffect(() => {
         const topics = mathSyllabus[selectedClass];
         if (topics && topics.length > 0) {
@@ -322,18 +338,23 @@ export default function PracticePage() {
         <div className="min-h-screen bg-gray-50 p-4 flex flex-col items-center">
             <div className="max-w-2xl w-full">
                 {/* Header */}
-                <div className="flex justify-between items-center mb-6 bg-white p-4 rounded-lg shadow-sm text-black">
-                    <div>
-                        <span className="font-semibold text-gray-500">Class {selectedClass}</span>
-                        <span className="mx-2">•</span>
-                        <span className="font-medium mr-4">{currentDifficulty}</span>
-                        <span className={`font-mono font-bold text-lg ${getTimerColor()}`}>
-                            ⏱ {formatTime(timeLeft)}
-                        </span>
-                    </div>
-                    <div className="text-right">
-                        <div className="font-bold text-blue-600">Score: {score}</div>
-                        <div className="text-xs text-gray-500 font-medium">Accuracy: {accuracy}%</div>
+                <div className="flex flex-col gap-4 mb-6">
+                    <Link href="/" className="self-start px-3 py-1 bg-gray-200 text-gray-700 rounded hover:bg-gray-300 transition-colors text-sm font-semibold">
+                        ← Back Home
+                    </Link>
+                    <div className="flex justify-between items-center bg-white p-4 rounded-lg shadow-sm text-black">
+                        <div>
+                            <span className="font-semibold text-gray-500">Class {selectedClass}</span>
+                            <span className="mx-2">•</span>
+                            <span className="font-medium mr-4">{currentDifficulty}</span>
+                            <span className={`font-mono font-bold text-lg ${getTimerColor()}`}>
+                                ⏱ {formatTime(timeLeft)}
+                            </span>
+                        </div>
+                        <div className="text-right">
+                            <div className="font-bold text-blue-600">Score: {score}</div>
+                            <div className="text-xs text-gray-500 font-medium">Accuracy: {accuracy}%</div>
+                        </div>
                     </div>
                 </div>
 
